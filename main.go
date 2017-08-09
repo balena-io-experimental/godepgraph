@@ -127,7 +127,7 @@ func processPackage(root string, pkgName string) error {
 		return nil
 	}
 
-	pkgs[pkg.ImportPath] = pkg
+	pkgs[pkgName] = pkg
 
 	// Don't worry about dependencies for stdlib packages
 	if pkg.Goroot && !*delveGoroot {
@@ -153,7 +153,7 @@ func getImports(pkg *build.Package) []string {
 	var imports []string
 	found := make(map[string]struct{})
 	for _, imp := range allImports {
-		if imp == pkg.ImportPath {
+		if imp == pkg.Name {
 			// Don't draw a self-reference when foo_test depends on foo.
 			continue
 		}
