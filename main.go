@@ -114,7 +114,7 @@ func main() {
 }
 
 func processPackage(root string, pkgName string) error {
-	if ignored[pkgName] {
+	if _, ok := pkgs[pkgName]; ok || ignored[pkgName] {
 		return nil
 	}
 
